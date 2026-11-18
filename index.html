@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Promises</title>
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        background-color: #f4f6f9;
+        color: #333;
+        width: 92%; /* Screen ka 92% hissa lega */
+        max-width: 1200px; /* Isko mazeed barha ya kam kar sakte hain agar zaroorat ho */
+        margin: 0 auto; /* Center mein rakhne ke liye */
+        padding: 20px;
+      }
+
+      h1 {
+        color: #2c3e50;
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 5px;
+        margin-top: 40px;
+      }
+
+      h2 {
+        color: #34495e;
+        font-size: 1.2rem;
+        margin-bottom: 5px;
+      }
+
+      h3 {
+        color: #16a085;
+        margin-bottom: 5px;
+      }
+
+      p {
+        margin-bottom: 10px;
+      }
+
+      ul,
+      ol {
+        background: #fff;
+        padding: 15px 15px 15px 30px;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      }
+
+      li {
+        margin-bottom: 5px;
+      }
+
+      pre {
+        background-color: #2d3748;
+        color: #e2e8f0;
+        padding: 15px;
+        border-radius: 6px;
+        overflow-x: auto;
+        font-family: "Courier New", Courier, monospace;
+        font-size: 0.95rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- question 1 -->
+    <h1>Q1. Bank Account Withdrawal</h1>
+
+    <p>Create a Promise for withdrawing money.</p>
+
+    <h2>Conditions:</h2>
+
+    <ul>
+      <li>Account balance = Rs. 10,000</li>
+      <li>Withdrawal amount = Rs. 7,000</li>
+      <li>If balance is sufficient, resolve the Promise.</li>
+      <li>Otherwise, reject the Promise.</li>
+      <li>Use .then() and .catch() to display the result.</li>
+    </ul>
+
+    <h3>Answer:</h3>
+
+    <pre>
+      let accountBalance = 10000;
+      let withdrawalAmount = 7000;
+
+      let withdrawMoney = new Promise((resolve, reject) => {
+        if (accountBalance >= withdrawalAmount) {
+          resolve("withdrawl successful");
+        } else {
+          reject("insufficient balance");
+        }
+      });
+
+      withdrawMoney
+        .then((result) => {
+          console.log(result);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+</pre
+    >
+
+    <!-- question 2 -->
+    <h1>Q2. Online Exam Result</h1>
+
+    <p>Create a Promise that checks student results.</p>
+
+    <h2>Conditions:</h2>
+
+    <ul>
+      <li>Marks 50 or above: Pass.</li>
+      <li>Marks below 50: Fail.</li>
+      <li>Marks greater than 100 or less than 0: Invalid marks.</li>
+      <li>Handle the result using .then() and .catch().</li>
+    </ul>
+
+    <h3>Answer:</h3>
+
+    <pre>
+        let marks = 75;
+        let checkResult = new Promise((resolve, reject) => {
+            if (marks > 100 || marks < 0) {
+                return reject("Invalid");
+            }
+            if (marks >= 50) {
+                resolve("Pass");
+            } else {
+                reject("Fail");
+            }
+        });
+
+        checkResult.then((result) => {
+            console.log(result);
+        }).catch((error) => {
+            console.log(error);
+        });
+</pre
+    >
+
+    <!-- question 3 -->
+    <h1>Q3. Product Delivery System</h1>
+
+    <p>Create a Promise for an online shopping delivery.</p>
+
+    <h2>Conditions:</h2>
+
+    <ul>
+      <li>Use setTimeout() to simulate a 3-second delivery process.</li>
+      <li>After 3 seconds, resolve with "Product Delivered Successfully".</li>
+      <li>If delivery is unsuccessful, reject with "Delivery Failed".</li>
+      <li>Display the result using .then() and .catch().</li>
+    </ul>
+
+    <h3>Answer:</h3>
+
+    <pre>
+  let deliveryStatus = true;
+
+let onlineShopping = new Promise((resolve, reject) => {
+    setTimeout(() => {
+
+        if (deliveryStatus) {
+            resolve("Product Delivered Successfully");
+        } else {
+            reject("Delivery Failed");
+        }
+
+    }, 3000);
+});
+
+      onlineShopping
+        .then((result) => {
+          console.log(result);
+        })
+
+        .catch((error) => {
+          console.log(error);
+        });
+</pre
+    >
+
+    <!-- question 4 -->
+    <h1>Q4. Promise Chaining</h1>
+
+    <p>Create a Promise that performs these operations:</p>
+
+    <h2>Conditions:</h2>
+
+    <ol>
+      <li>Start with a number: 10.</li>
+      <li>Add 20</li>
+      <li>Subtract 5</li>
+      <li>Multiply the result by 2.</li>
+      <li>Display the final result</li>
+      <li>Handle the result using .then() and .catch().</li>
+    </ol>
+
+    <h3>Answer:</h3>
+
+    <pre>
+      let myPromise = new Promise((resolve, reject) => {
+        resolve(10);
+      });
+
+      myPromise
+        .then((result) => {
+          return result + 20;
+        })
+
+        .then((result) => {
+          return result * 2;
+        })
+
+        .then((result) => {
+          return result - 5;
+        })
+
+        .then((result) => {
+          console.log("Final Result:", result);
+        })
+
+        .catch((error) => {
+          console.log(error);
+        });
+      </pre
+    >
+
+    <script>
+      // answer 1
+      let accountBalance = 10000;
+      let withdrawalAmount = 7000;
+
+      let withdrawMoney = new Promise((resolve, reject) => {
+        if (accountBalance >= withdrawalAmount) {
+          resolve("withdrawal successful");
+        } else {
+          reject("insufficient balance");
+        }
+      });
+
+      withdrawMoney
+        .then((result) => {
+          console.log(result);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+
+      // answer 2
+
+      let marks = 75;
+      let checkResult = new Promise((resolve, reject) => {
+        if (marks > 100 || marks < 0) {
+          return reject("Invalid");
+        }
+        if (marks >= 50) {
+          resolve("Pass");
+        } else {
+          reject("Fail");
+        }
+      });
+
+      checkResult
+        .then((result) => {
+          console.log(result);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+
+      // answer 3
+
+      let deliveryStatus = true;
+
+      let onlineShopping = new Promise((resolve, reject) => {
+        setTimeout(() => {
+          if (deliveryStatus) {
+            resolve("Product Delivered Successfully");
+          } else {
+            reject("Delivery Failed");
+          }
+        }, 3000);
+      });
+
+      onlineShopping
+        .then((result) => {
+          console.log(result);
+        })
+
+        .catch((error) => {
+          console.log(error);
+        });
+
+      // answer 4
+
+      let myPromise = new Promise((resolve, reject) => {
+        resolve(10);
+      });
+
+      myPromise
+        .then((result) => {
+          return result + 20;
+        })
+
+        .then((result) => {
+          return result * 2;
+        })
+
+        .then((result) => {
+          return result - 5;
+        })
+
+        .then((result) => {
+          console.log("Final Result:", result);
+        })
+
+        .catch((error) => {
+          console.log(error);
+        });
+    </script>
+  </body>
+</html>
